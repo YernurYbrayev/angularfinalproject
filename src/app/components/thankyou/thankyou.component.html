@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron text-center">
+        <h1 class="display-3">Спасибо!</h1>
+        <p class="lead"><strong>Пожалуйста, провеьте почту</strong> для подтверждения заказа.</p>
+        <hr>
+        <p>
+
+        <p>ID заказа : <strong>{{orderId}}</strong></p>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Товар</th>
+          <th>Имя товара</th>
+          <th>Цена</th>
+          <th>Количество</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of products">
+          <td>
+            <img [src]="p.image" alt="{{p.title}}" class="img-thumbnail" width="100px">
+          </td>
+          <td>{{p.title}}</td>
+          <td>{{p.price | currency:'USD'}}</td>
+          <td>{{p.quantityOrdered}}</td>
+        </tr>
+
+        <tr class="border-0">
+          <td style="border: none;"></td>
+          <td></td>
+          <td>Итого</td>
+          <td>{{cartTotal | currency:'USD'}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

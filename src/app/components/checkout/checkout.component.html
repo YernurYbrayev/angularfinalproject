@@ -1,0 +1,108 @@
+<ngx-spinner
+  bdColor= "rgba(151,149,149,0.4)"
+  size="large"
+  color="orange"
+  type="ball-clip-rotate-pulse"
+  fullScreen="true"
+>
+  <p style="font-size: 20px; color: black">Booking Order...</p>
+</ngx-spinner>
+
+<div class="section" *ngIf="cartData.total > 0">
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-7">
+      <div class="billing-details">
+        <div class="section-title">
+          <h3 class="title">Адресс доставки</h3>
+        </div>
+        <div class="form-group">
+          <input class="input" type="text" name="first-name" placeholder="Имя">
+        </div>
+        <div class="form-group">
+          <input class="input" type="text" name="last-name" placeholder="Фамилия">
+        </div>
+        <div class="form-group">
+          <input class="input" type="email" name="email" placeholder="Эл. почта">
+        </div>
+        <div class="form-group">
+          <input class="input" type="text" name="address" placeholder="Адресс">
+        </div>
+        <div class="form-group">
+          <input class="input" type="text" name="city" placeholder="Город">
+        </div>
+        <div class="form-group">
+          <input class="input" type="text" name="country" placeholder="Страна">
+        </div>
+        <div class="form-group">
+          <input class="input" type="tel" name="tel" placeholder="Телефон">
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Details -->
+    <div class="col-md-5 order-details">
+      <div class="section-title text-center">
+        <h3 class="title">Ваш заказ</h3>
+      </div>
+      <div class="order-summary">
+        <div class="order-col">
+          <div><strong>ТОВАР</strong></div>
+          <div><strong>Стоимость</strong></div>
+        </div>
+        <div class="order-products">
+          <div class="order-col" *ngFor="let c of cartData.data;">
+            <div>{{c.numInCart}} x {{c.product.name}}</div>
+            <div>{{(c.product.price*c.numInCart) | currency:'USD'}}</div>
+          </div>
+        </div>
+        <div class="order-col">
+          <div>Доставка</div>
+          <div><strong>Беспл.</strong></div>
+        </div>
+        <div class="order-col dropdown-divider">
+          <div><strong>Итого</strong></div>
+          <div><strong class="order-total">{{cartTotal | currency:'USD'}}</strong></div>
+        </div>
+      </div>
+      <div class="payment-method">
+        <div class="input-radio">
+          <input type="radio" name="payment" id="payment-1">
+          <label for="payment-1">
+            <span></span>
+            Перевод через банк
+          </label>
+        </div>
+        <div class="input-radio">
+          <input type="radio" name="payment" id="payment-2">
+          <label for="payment-2">
+            <span></span>
+            Оплата через чек
+          </label>
+        </div>
+        <div class="input-radio">
+          <input type="radio" name="payment" id="payment-3">
+          <label for="payment-3">
+            <span></span>
+            Оплата через PayPal/Qiwi
+          </label>
+        </div>
+      </div>
+      <div class="input-checkbox">
+        <input type="checkbox" id="terms">
+        <label for="terms">
+          <span></span>
+          Я прочитал все и согласен с  <a href="#">правилами доставки и оплаты</a>
+        </label>
+      </div>
+      <button type="submit" class="btn-outline-danger btn-sm my-2 btn-block" [disabled]="cartTotal <= 0 " (click)="onCheckout()">Заказать</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="text-center my-5" *ngIf="cartData.total <= 0">
+  <h4>Ваша корзина пуста</h4>
+  <button class="btn btn-primary btn-lg mt-3" routerLink="/">Перейти в магазин</button>
+</div>
